@@ -2,6 +2,7 @@ package org.example;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -13,10 +14,16 @@ public class Main {
 //        long totaVotes = dataRetriever.countAllVotes();
 //        System.out.println("TotalVotes: "+ totaVotes);
 
+//       Q2
+//        List<VoteTypeCount> results = dataRetriever.countVotesByType();
+//        System.out.println(results);
 
-        List<VoteTypeCount> results = dataRetriever.countVotesByType();
+        List<CandidateVoteCount> candidateVoteCounts = dataRetriever.countValidVotesByCandidate();
+        System.out.println(candidateVoteCounts);
 
-        System.out.println(results);
+
+
+
 
 
 
