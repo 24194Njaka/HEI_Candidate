@@ -26,8 +26,7 @@ public class DataRetriever {
         return 0;
     }
 
-
-     public List<VoteTypeCount> countVotesByType(){
+    public List<VoteTypeCount> countVotesByType(){
         List<VoteTypeCount> voteTypeCounts = new ArrayList<>();
         String sql = """
                 SELECT vote_type, COUNT(id) as count FROM vote
@@ -104,8 +103,41 @@ public class DataRetriever {
 
      }
 
+     public  double computeTurnoutRate() throws SQLException {
+         String sql = """
+                
+                 SELECT
+                    COUNT(DISTINCT v.voter_id) AS vote_count,
+                    COUNT(e.id) AS total_voters
+                FROM voter e
+                LEFT JOIN vote v ON e.id = v.voter_id
+   
 
+            """;
 
+        try(Connection connection = DBConnection.
+              getConnection();
+        PreparedStatement statement = connection.
+              prepareStatement(sql);
+        ResultSet resultSet =
+
+             statement.executeQuery()) {
+
+            if (resultSet.next()) {
+                long votedCount = resultSet.getLong("vote_count");
+                long totalVoters = resultSet.getLong("total_voters");
+
+                if(totalVoters == 0) return 0.0;
+
+                return ((double) totalVoters / votedCount) * 100;
+
+            }
+
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+     }
+        return 0.0;
+     }
 
 
 }

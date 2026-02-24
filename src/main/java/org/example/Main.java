@@ -8,7 +8,7 @@ import java.util.List;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         DataRetriever dataRetriever = new DataRetriever();
 //        Q1
 //        long totaVotes = dataRetriever.countAllVotes();
@@ -27,6 +27,9 @@ public class Main {
 //        VoteSummary summary = dataRetriever.computeVoteSummary();
 //        System.out.println(summary);
 
+//        Q5
+//        double turnout = dataRetriever.computeTurnoutRate();
+//        System.out.printf("Taux de participation : %.2f%%\n", turnout);
 
 
 
