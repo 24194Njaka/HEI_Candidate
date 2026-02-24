@@ -18,8 +18,17 @@ public class Main {
 //        List<VoteTypeCount> results = dataRetriever.countVotesByType();
 //        System.out.println(results);
 
-        List<CandidateVoteCount> candidateVoteCounts = dataRetriever.countValidVotesByCandidate();
-        System.out.println(candidateVoteCounts);
+//        Q3
+//        List<CandidateVoteCount> candidateVoteCounts = dataRetriever.countValidVotesByCandidate();
+//        System.out.println(candidateVoteCounts);
+
+
+//        Q4
+//        VoteSummary summary = dataRetriever.computeVoteSummary();
+//        System.out.println(summary);
+
+
+
 
 
 

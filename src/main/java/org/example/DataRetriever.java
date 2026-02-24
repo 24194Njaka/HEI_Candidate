@@ -77,6 +77,33 @@ public class DataRetriever {
         return candidateVoteCounts;
      }
 
+     public VoteSummary computeVoteSummary(){
+        String sql = """
+            select count(case when vote_type = 'VALID' then 1 END) as valid_count,
+                   count(case when vote_type= 'BLANK' then 1 END) as blank_count,
+                   count( case when vote_type= 'NULL' then 1 END) as null_count from vote
+        """;
+
+        try(Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                long validCount = resultSet.getLong("valid_count");
+                long blankCount = resultSet.getLong("blank_count");
+                long nullCount = resultSet.getLong("null_count");
+
+                return new VoteSummary(validCount, blankCount, nullCount);
+
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+            }
+        return null;
+
+     }
+
 
 
 
