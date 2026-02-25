@@ -31,6 +31,14 @@ public class Main {
 //        double turnout = dataRetriever.computeTurnoutRate();
 //        System.out.printf("Taux de participation : %.2f%%\n", turnout);
 
+        // Q6
+
+//        ElectionResult result = dataRetriever.findWinner();
+//        System.out.println(result);
+
+
+
+
 
 
 

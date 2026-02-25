@@ -139,5 +139,37 @@ public class DataRetriever {
         return 0.0;
      }
 
+     public  ElectionResult findWinner(){
+
+        String sql = """
+                SELECT c.name AS candidate_name,
+                                       COUNT(v.candidate_id) AS valid_vote_count FROM candidate c
+                                LEFT JOIN vote v ON v.candidate_id = c.id and v.vote_type = 'VALID'
+                                GROUP BY c.name, c.id ORDER BY c.id
+                                LIMIT 1
+                """;
+
+         try(Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+             if (resultSet.next()) {
+                 String candidateName = resultSet.getString("candidate_name");
+                 long validVoteCount = resultSet.getLong("valid_vote_count");
+                 return new ElectionResult(candidateName, validVoteCount);
+
+
+             }
+
+         } catch (SQLException e){
+             throw new  RuntimeException(e);
+         }
+
+         return null;
+
+
+     }
+
+
+
 
 }
